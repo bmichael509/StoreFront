@@ -1,0 +1,41 @@
+@model ProductsAndCategories.Models.CategoriesWrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1><a href="/products">Products</a> | Categories</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="col-sm-12">New Category</h3>
+                <form asp-action="CreateCategory" asp-controller="Home" method="post">
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="CategoryForm.Name"></span>
+                        <label asp-for="CategoryForm.Name" class="col-sm-4"></label>
+                        <input asp-for="CategoryForm.Name" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <input type="submit" value="Create" class="col-sm-4 offset-sm-4 btn btn-primary">
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <h3 class="col-sm-12">Existing Products</h3>
+                @foreach (var cat in @Model.AllCategories)
+                {
+                    <p><a href="/categories/@cat.CategoryId">@cat.Name</a></p>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+@model ProductsAndCategories.Models.ProductsWrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <h1>Products | <a href="/categories">Categories</a></h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <h3 class="col-sm-12">New Product</h3>
+                <form asp-action="CreateProduct" asp-controller="Home" method="post">
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="ProductForm.Name"></span>
+                        <label asp-for="ProductForm.Name" class="col-sm-4"></label>
+                        <input asp-for="ProductForm.Name" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="ProductForm.Description"></span>
+                        <label asp-for="ProductForm.Description" class="col-sm-4"></label>
+                        <input asp-for="ProductForm.Description" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <span class="col-sm-8 offset-sm-4 text-danger" asp-validation-for="ProductForm.Price"></span>
+                        <label asp-for="ProductForm.Price" class="col-sm-4"></label>
+                        <input asp-for="ProductForm.Price" class="col-sm-8 form-control">
+                    </div>
+                    <div class="form-group row">
+                        <input type="submit" value="Create" class="col-sm-4 offset-sm-4 btn btn-primary">
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-6">
+                <h3 class="col-sm-12">Existing Products</h3>
+                @foreach (var prod in @Model.AllProducts)
+                {
+                    <p><a href="/products/@prod.ProductId">@prod.Name</a></p>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>
